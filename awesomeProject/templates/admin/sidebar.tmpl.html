@@ -1,0 +1,78 @@
+<div class="sidebar" data-color="blue" data-image="/static/img/sidebar-5.jpg">
+	<div class="sidebar-wrapper section-sidebar">
+		<div class="logo">
+			<a href="/admin" class="simple-text">
+				Admin Section
+			</a>
+		</div>
+
+		<ul class="nav">
+			{{ $links := .Params.OGet "links" }}
+			{{ if $links }}
+				{{ range $index, $element := $links }}
+					{{ if $element.Show }}
+						{{ if $element.Active }}
+							<li class="active">
+						{{ else }}
+							<li>
+						{{ end }}
+							<a href="{{ $element.URL }}">
+								<i class="{{ $element.Icon }}"></i>
+								<p>{{ $element.Name }}</p>
+							</a>
+						</li>
+					{{ end }}
+				{{ end }}
+			{{ end }}
+
+			{{ $groups := .Params.OGet "groups" }}
+			{{ $groupKeys := .Params.OGet "groupKeys" }}
+			{{ if $groups }}
+				{{ range $index, $group := $groupKeys }}
+					{{ if $group.Show }}
+						{{ $links := index $groups $group }}
+						<li>
+							<a id="{{ $group.Name }}" class="sidebar-group-item">
+								<i class="{{ $group.Icon }}"></i>
+								<p>
+									<span>{{ $group.DisplayName }}</span>
+									{{ if $group.Active }}
+										<i class="pe-7s-angle-right" style="display: none; float: right;"></i>
+										<i class="pe-7s-angle-down" style="float: right;"></i>
+									{{ else }}
+										<i class="pe-7s-angle-right" style="float: right;"></i>
+										<i class="pe-7s-angle-down" style="display: none; float: right;"></i>
+									{{ end }}
+								</p>
+
+							</a>
+							{{ if $group.Active }}
+							<ul id="{{ $group.Name }}-contents" class="nav sidebar-group-contents">
+							{{ else }}
+							<ul id="{{ $group.Name }}-contents" class="nav sidebar-group-contents" style="display: none;">
+							{{ end }}
+								{{ if $links }}
+									{{ range $index, $element := $links }}
+										{{ if $element.Show }}
+											{{ if $element.Active }}
+											<li class="active">
+											{{ else }}
+											<li>
+											{{ end }}
+												<a href="{{ $element.URL }}">
+													<i class="{{ $element.Icon }}"></i>
+													<p>{{ $element.Name }}</p>
+												</a>
+											</li>
+										{{ end }}
+									{{ end }}
+								{{ end }}
+							</ul>
+							</ul>
+						</li>
+					{{ end }}
+				{{ end }}
+			{{ end }}
+		</ul>
+	</div>
+</div>

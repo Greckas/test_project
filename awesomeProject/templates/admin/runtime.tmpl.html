@@ -1,0 +1,23 @@
+<div class="panel panel-info">
+	<div class="panel-heading">Statistics</div>
+
+	<div class="panel-body">
+		<table class="table">
+			<tbody>
+			<tr>
+			{{ $stats := .Params.OGet "stats" }}
+			{{ if $stats }}
+				{{ range $index, $element := $stats }}
+
+					<td align="right" width="8%">
+						<i class="{{ $element.Icon }}"></i>
+						{{ $element.Name }}
+					</td>
+					<td width="14.5%"><div class="well" style="padding: 8px; margin: 0px 16px 0px 0px">{{ $element.Value }}</div></td>
+				{{ end }}
+			{{ end }}
+			</tr>
+			<tbody>
+		</table>
+	</div>
+</div>

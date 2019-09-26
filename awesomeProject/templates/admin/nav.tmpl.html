@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default navbar-fixed">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/admin">TEST PROJECT</a>
+			<span class="navbar-brand text-primary">{{ .Params.OGet "appName" }}</span>
+			<span class="navbar-brand text-info">{{ .Params.OGet "serverType"}}</span>
+			{{ $inMaintenance := .Params.OGet "inMaintenance" }}
+			{{ if $inMaintenance }}
+				<span class="navbar-brand text-danger">IN MAINTENANCE</span>
+			{{ end }}
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+					{{ $user := .Params.OGet "_user" }}
+					<li>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span>{{ $user.Username }}</span> <i class="fa fa-user"></i>
+						</a>
+						<ul class="dropdown-menu" >
+							<li><a href="logout" method="post">Log out</a></li>
+						</ul>
+					</li>
+
+				<li class="separator hidden-lg hidden-md"></li>
+			</ul>
+		</div>
+	</div>
+</nav>
